@@ -41,14 +41,14 @@ const NodeRow = React.memo(function NodeRow({ node, openNode, setOpenNode, photo
           <div
             className={`${
               node.type === "big" ? "w-4 h-4" : "w-3 h-3"
-            } rounded-full bg-pink-500 z-10`}
+            } rounded-full bg-black/40 z-10`} // changed to light black
           />
           {!isLast && (
             <div className="flex flex-col items-center mt-1 mb-1">
               {Array.from({ length: 10 }).map((_, idx) => (
                 <div
                   key={idx}
-                  className="w-2 h-2 bg-pink-300 rounded-full my-1"
+                  className="w-2 h-2 bg-black/20 rounded-full my-1" // light black line
                 />
               ))}
             </div>
@@ -135,15 +135,15 @@ export default function BirthdayRoadmapComponent() {
   const nodes = useMemo(
     () => [
       { id: "hero", type: "hero" },
-      ...Array.from({ length: 12 }, (_, i) => ({
+      ...photos.map((_, i) => ({
         id: `p-${i}`,
         type: "photo",
         index: i,
-      })),
+      })), // all photos are nodes now
       { id: "big", type: "big" },
       { id: "end", type: "end" },
     ],
-    []
+    [photos]
   );
 
   const [openNode, setOpenNode] = useState(null);
@@ -199,22 +199,22 @@ export default function BirthdayRoadmapComponent() {
   const bgTop = lerpColor("#FFF7FB", "#FFDEE9", scrollProgress);
   const bgBottom = lerpColor("#FFE6F0", "#FDEDFB", scrollProgress);
 
-  // Floating emojis
+  // Floating emojis + butterflies
   const floatingItems = useMemo(
     () =>
-      Array.from({ length: 55 }).map(() => ({
+      Array.from({ length: 50 }).map(() => ({
         left: Math.random() * 100,
         delay: Math.random() * 6,
         dur: 10 + Math.random() * 10,
-        size: 14 + Math.random() * 22,
+        size: 14 + Math.random() * 20,
         emoji:
-          Math.random() > 0.6
+          Math.random() > 0.7
+            ? "🦋"
+            : Math.random() > 0.5
             ? "❤️"
             : Math.random() > 0.5
             ? "🌹"
-            : Math.random() > 0.5
-            ? "🎈"
-            : "✨",
+            : "🎈",
       })),
     []
   );
@@ -239,7 +239,7 @@ export default function BirthdayRoadmapComponent() {
       }}
       className="relative min-h-screen overflow-x-hidden"
     >
-      {/* Floating Emojis */}
+      {/* Floating Emojis and Butterflies */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
         {floatingItems.map((item, i) => (
           <motion.div
@@ -328,4 +328,3 @@ export default function BirthdayRoadmapComponent() {
     </div>
   );
 }
-    
