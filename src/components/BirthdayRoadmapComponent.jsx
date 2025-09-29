@@ -113,7 +113,7 @@ const NodeRow = React.memo(function NodeRow({ node, openNode, setOpenNode, photo
             May your life be filled with love, happiness, and endless opportunities! 💖
           </p>
           <p className="text-md sm:text-lg text-pink-600">
-            Keep shining and chasing your dreams. The best is yet to come! <br>And ab Thank you bola to maar padegi😒</br> ✨
+            Keep shining and chasing your dreams. The best is yet to come! <p className="text-black">And ab Thank you bola to maar padegi😒</p>
           </p>
         </motion.div>
       </div>
